@@ -5,6 +5,13 @@ type Course {
   teacher: String
   description: String!
   topic: String
+  people: [Student]
+}
+
+type Student {
+  _id: ID!
+  name: String!
+  email: String!
 }
 
 type Query {
@@ -12,6 +19,10 @@ type Query {
   getCourses: [Course]
   #"Devuelve un curso" ! -> Campo obligatorio
   getCourse(id: ID!): Course
+  #"Devuelve todos los estudiantes"
+  getStudents: [Student]
+  #"Devuelve un estudiante" ! -> Campo obligatorio
+  getStundent(id: ID!): String
 }
 
 input CourseInput {
@@ -21,7 +32,35 @@ input CourseInput {
   topic: String
 }
 
+input CourseEditInput {
+  title: String
+  teacher: String
+  description: String
+  topic: String
+}
+
+input StudentInput {
+  name: String!
+  email: String!
+}
+input StudentEditInput {
+  name: String
+  email: String
+}
+
 type Mutation {
   #"Crea un curso"
   createCourse(input: CourseInput!): Course
+  #"Edita un curso"
+  editCourse(id: ID!, input: CourseEditInput!): Course
+  #"Eliminar un curso"
+  deleteCourse(id: ID!): Boolean
+  #"Crea un estudiante"
+  createStudent(input: StudentInput!): Student
+  #"Edita un estudiante"
+  editStudent(id: ID!, input: StudentEditInput!): Student
+  #"Eliminar un estudiante"
+  deleteStudent(id: ID!): Boolean
+  #"Agrega una persona a un curso"
+  addPeople(courseID: ID!, personID: ID!): Course
 }
