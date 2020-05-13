@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "SET NODE_ENV=production && node build/index.js",
     "dev": "nodemon --exec babel-node src/index.js --watch lib/",
-    "build": "babel src/ --out-dir build"
+    "build": "babel src/ --out-dir build && babel lib/ --out-dir build/lib"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^15.0.0",

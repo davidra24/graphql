@@ -1,0 +1,17 @@
+{
+  searchItems(keyWord: "Estudiante") {
+    __typename
+    ... on Course {
+      title
+      description
+    }
+    ... on Monitor {
+      name
+      phone
+    }
+    ... on Student {
+      name
+      email
+    }
+  }
+}

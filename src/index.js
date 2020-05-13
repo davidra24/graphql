@@ -5,10 +5,13 @@ import gqlMiddleware from 'express-graphql';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { resolvers } from '../lib/resolvers';
-import { connectDB } from '../lib/db';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.port || 3000;
+const isDev = process.env.NODE_ENV !== 'production';
+
+app.use(cors());
 
 //Lectura del esquema
 const typeDefs = readFileSync(
@@ -26,7 +29,7 @@ app.use(
   gqlMiddleware({
     schema,
     rootValue: resolvers,
-    graphiql: true,
+    graphiql: isDev,
   })
 );
 

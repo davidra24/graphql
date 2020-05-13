@@ -1,0 +1,46 @@
+{
+  AllCourses: getCourses {
+    _id
+    title
+    description
+    people {
+      _id
+      name
+      email
+    }
+  }
+
+  Course: getCourse(id: "5eb75b829bd49ab4a81c3d93") {
+    ...CourseFields
+    teacher
+  }
+
+  Course1: getCourse(id: "5eb75c0b9bd49ab4a81c3d94") {
+    ...CourseFields
+    topic
+  }
+}
+
+fragment CourseFields on Course {
+  _id
+  title
+  description
+  people {
+    _id
+    name
+  }
+}
+
+{
+  getPeople {
+    _id
+    name
+    email
+    ... on Monitor {
+      phone
+    }
+    ... on Student {
+      avatar
+    }
+  }
+}
